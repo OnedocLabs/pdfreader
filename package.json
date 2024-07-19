@@ -1,0 +1,56 @@
+{
+  "name": "@fileforge/pdfreader",
+  "version": "0.1.0",
+  "description": "Easiest way to display and interact with PDFs from your web app.",
+  "main": "dist/index.cjs",
+  "type": "module",
+  "exports": {
+    "require": "./dist/pdfreader.js",
+    "import": "./dist/pdfreader.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "test-storybook",
+    "build": "vite build",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.6.1",
+    "@eslint/js": "^9.6.0",
+    "@storybook/addon-essentials": "^8.2.3",
+    "@storybook/addon-interactions": "^8.2.3",
+    "@storybook/addon-links": "^8.2.3",
+    "@storybook/blocks": "^8.2.3",
+    "@storybook/react": "^8.2.3",
+    "@storybook/react-vite": "^8.2.3",
+    "@storybook/test": "^8.2.3",
+    "@storybook/test-runner": "^0.19.1",
+    "@types/eslint__js": "^8.42.3",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "pdfjs-dist": "^4.4.168",
+    "prettier": "^3.3.2",
+    "react": "^18.3.1",
+    "storybook": "^8.2.3",
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^7.16.0",
+    "vite": "^5.3.3"
+  },
+  "peerDependencies": {
+    "pdfjs-dist": "^4.4",
+    "react": "^18"
+  },
+  "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
+    "@use-gesture/react": "^10.3.1",
+    "nanoid": "^5.0.7",
+    "react-zoom-pan-pinch": "^3.6.1"
+  }
+}
