@@ -49,3 +49,17 @@ export const Example = ({ fileURL }: { fileURL: string }) => {
     </Root>
   );
 };
+
+export {
+  Viewport,
+  Root,
+  Page,
+  AnnotationLayer,
+  CanvasLayer,
+  TextLayer,
+  Outline,
+  OutlineChildItems,
+  OutlineItem,
+  Pages,
+  CurrentPage,
+};

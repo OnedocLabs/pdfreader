@@ -1,7 +1,6 @@
 export {
   AnnotationLayer,
   CanvasLayer,
-  Controls,
   Debug,
   Outline,
   Page,
