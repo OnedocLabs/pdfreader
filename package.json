@@ -2,11 +2,11 @@
   "name": "@fileforge/pdfreader",
   "version": "0.1.0",
   "description": "Easiest way to display and interact with PDFs from your web app.",
-  "main": "dist/index.cjs",
+  "main": "dist/pdfreader.cjs",
   "type": "module",
   "exports": {
-    "require": "./dist/pdfreader.js",
-    "import": "./dist/pdfreader.mjs"
+    "require": "./dist/pdfreader.cjs",
+    "import": "./dist/pdfreader.js"
   },
   "files": [
     "dist"

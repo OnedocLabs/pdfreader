@@ -24,7 +24,7 @@ import {
   usePDFOutline,
 } from "@/lib/pdf/links";
 
-const Root = ({
+export const Root = ({
   children,
   fileURL,
 }: { children: ReactNode } & usePDFDocumentParams) => {
@@ -54,11 +54,11 @@ const Root = ({
   );
 };
 
-const Controls = () => {
+export const Controls = () => {
   return <div>Controls</div>;
 };
 
-const OutlineItem = ({
+export const OutlineItem = ({
   level = 0,
   item,
 }: {
@@ -98,7 +98,7 @@ const OutlineItem = ({
   );
 };
 
-const Outline = () => {
+export const Outline = () => {
   const outline = usePDFOutline();
 
   return (
@@ -109,7 +109,7 @@ const Outline = () => {
   );
 };
 
-const Debug = () => {
+export const Debug = () => {
   const { zoom, translateX, translateY, currentPage } = useViewport();
 
   return (
@@ -122,7 +122,7 @@ const Debug = () => {
   );
 };
 
-const Viewport = ({ children }: { children: ReactNode }) => {
+export const Viewport = ({ children }: { children: ReactNode }) => {
   return (
     <ViewportContainer className="bg-gray-100 h-[700px] overflow-auto">
       {children}
@@ -130,7 +130,7 @@ const Viewport = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const Page = ({
+export const Page = ({
   children,
   pageNumber = 1,
 }: {
@@ -170,7 +170,7 @@ const Page = ({
   );
 };
 
-const Pages = ({ children }: { children: ReactElement }) => {
+export const Pages = ({ children }: { children: ReactElement }) => {
   const { pdfDocumentProxy } = usePDFDocument();
 
   return (
@@ -182,7 +182,7 @@ const Pages = ({ children }: { children: ReactElement }) => {
   );
 };
 
-const TextLayer = () => {
+export const TextLayer = () => {
   const { textContainerRef } = useTextLayer();
 
   return (
@@ -198,7 +198,7 @@ const TextLayer = () => {
   );
 };
 
-const AnnotationLayer = () => {
+export const AnnotationLayer = () => {
   const { annotationLayerRef } = useAnnotationLayer();
 
   return (
@@ -214,7 +214,7 @@ const AnnotationLayer = () => {
   );
 };
 
-const CanvasLayer = () => {
+export const CanvasLayer = () => {
   const { canvasRef } = useCanvasLayer();
 
   return (
