@@ -1,22 +1,20 @@
 import { useViewportContainer } from "@/lib/viewport";
 import { HTMLProps, useRef } from "react";
+import { Primitive } from "../Primitive";
 
-export const ViewportContainer = ({
-  children,
-  ...props
-}: HTMLProps<HTMLDivElement>) => {
+export const Viewport = ({ children, ...props }: HTMLProps<HTMLDivElement>) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const elementWrapperRef = useRef<HTMLDivElement>(null);
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const { origin } = useViewportContainer({
+  useViewportContainer({
     elementRef: elementRef,
     elementWrapperRef: elementWrapperRef,
     containerRef: containerRef,
   });
 
   return (
-    <div
+    <Primitive.div
       ref={containerRef}
       {...props}
       style={{
@@ -25,6 +23,7 @@ export const ViewportContainer = ({
         touchAction: "none",
         ...props.style,
         position: "relative",
+        overflow: "auto",
       }}
     >
       <div
@@ -45,18 +44,9 @@ export const ViewportContainer = ({
             margin: "0 auto",
           }}
         >
-          <div
-            className="hidden w-2 h-2 bg-red-400 z-20 -translate-x-1/2 -translate-y-1/2"
-            style={{
-              pointerEvents: "none",
-              position: "absolute",
-              top: origin[1],
-              left: origin[0],
-            }}
-          ></div>
           {children}
         </div>
       </div>
-    </div>
+    </Primitive.div>
   );
 };

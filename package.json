@@ -50,7 +50,6 @@
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
     "@use-gesture/react": "^10.3.1",
-    "nanoid": "^5.0.7",
-    "react-zoom-pan-pinch": "^3.6.1"
+    "clsx": "^2.1.1"
   }
 }

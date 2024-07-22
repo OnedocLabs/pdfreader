@@ -12,6 +12,7 @@ export const useCanvasLayer = () => {
   const { visible } = useVisibility({ elementRef: canvasRef });
   const { zoom: bouncyZoom } = useViewport();
   const zoom = useDebounce(bouncyZoom, 100);
+  const debouncedVisible = useDebounce(visible, 100);
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -22,7 +23,7 @@ export const useCanvasLayer = () => {
 
     const canvas = canvasRef.current;
 
-    const scale = visible ? dpr * zoom : 1;
+    const scale = debouncedVisible ? dpr * zoom : 1;
 
     canvas.height = viewport.height * scale;
     canvas.width = viewport.width * scale;
@@ -41,7 +42,7 @@ export const useCanvasLayer = () => {
     return () => {
       void renderingTask.cancel();
     };
-  }, [pdfPageProxy, canvasRef.current, dpr, visible, zoom]);
+  }, [pdfPageProxy, canvasRef.current, dpr, debouncedVisible, zoom]);
 
   return {
     canvasRef,

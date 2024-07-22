@@ -83,6 +83,7 @@ export interface ViewportContextType {
   setPageVisible: (pageNumber: number, percentageVisible: number) => void;
   currentPage: number;
   goToPage: (pageNumber: number) => void;
+  setViewportRef: (ref: RefObject<HTMLDivElement>) => void;
 }
 
 export const defaultViewportContext = {
@@ -112,6 +113,9 @@ export const defaultViewportContext = {
   goToPage() {
     throw new Error("Viewport context not initialized");
   },
+  setViewportRef() {
+    throw new Error("Viewport context not initialized");
+  },
 } satisfies ViewportContextType;
 
 export const ViewportContext = createContext<ViewportContextType>(
@@ -139,6 +143,7 @@ export const useViewportContext = ({
   const pages = useRef(
     new Map<number, { containerRef: RefObject<HTMLDivElement> }>(),
   );
+  const viewportRef = useRef<HTMLDivElement | null>(null);
   const [visiblePages, setVisiblePages] = useState(new Map<number, number>());
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -184,12 +189,37 @@ export const useViewportContext = ({
     goToPage: (pageNumber: number) => {
       const pageRef = pages.current.get(pageNumber);
 
-      if (pageRef) {
-        pageRef.containerRef.current?.scrollIntoView({
+      if (pageRef && viewportRef.current) {
+        const viewportRefRect = viewportRef.current.getBoundingClientRect();
+        const pageRefRect =
+          pageRef.containerRef.current!.getBoundingClientRect();
+
+        // TODO: use scroll properties
+        /* pageRef.containerRef.current?.scrollIntoView({
+          behavior: "smooth",
           block: "nearest",
-          inline: "nearest",
+          inline: "start",
+        }); */
+
+        viewportRef.current.scrollTo({
+          top: Math.ceil(
+            viewportRef.current.scrollTop +
+              pageRefRect.top -
+              viewportRefRect.top,
+          ),
+          left: Math.ceil(
+            viewportRef.current.scrollLeft +
+              pageRefRect.left -
+              viewportRefRect.left,
+          ),
+          behavior: "smooth",
         });
+
+        return pageNumber;
       }
+    },
+    setViewportRef: (ref) => {
+      viewportRef.current = ref.current;
     },
   } satisfies ViewportContextType;
 };
@@ -267,7 +297,11 @@ export const useViewportContainer = ({
 }) => {
   const [origin, setOrigin] = useState<[number, number]>([0, 0]);
 
-  const { minZoom, maxZoom, setZoom } = useViewport();
+  const { minZoom, maxZoom, setZoom, setViewportRef } = useViewport();
+
+  useEffect(() => {
+    setViewportRef(containerRef);
+  }, [containerRef.current]);
 
   const transformations = useRef<{
     translateX: number;

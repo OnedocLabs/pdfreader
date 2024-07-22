@@ -1,113 +1,13 @@
-import { cloneElement, ReactElement, ReactNode, useRef } from "react";
-import {
-  PDFDocumentContext,
-  usePDFDocument,
-  usePDFDocumentContext,
-  type usePDFDocumentParams,
-} from "@/lib/pdf/document";
-import { PDFPageContext, usePDFPageContext } from "@/lib/pdf/page";
-import { useCanvasLayer } from "@/lib/pdf/layers/canvas";
-import { useTextLayer } from "@/lib/pdf/layers/text";
-
 import "pdfjs-dist/web/pdf_viewer.css";
-import { useAnnotationLayer } from "@/lib/pdf/layers/annotation";
-import { ViewportContainer } from "./Viewport";
-import {
-  usePageViewport,
-  useViewport,
-  useViewportContext,
-  ViewportContext,
-} from "@/lib/viewport";
-import {
-  PDFLinkServiceContext,
-  useCreatePDFLinkService,
-  usePDFOutline,
-} from "@/lib/pdf/links";
-
-export const Root = ({
-  children,
-  fileURL,
-}: { children: ReactNode } & usePDFDocumentParams) => {
-  const { ready, context, pdfDocumentProxy } = usePDFDocumentContext({
-    fileURL,
-  });
-  const viewportContext = useViewportContext({});
-  const linkService = useCreatePDFLinkService(
-    pdfDocumentProxy,
-    viewportContext,
-  );
-
-  return (
-    <div className="border">
-      {ready ? (
-        <PDFDocumentContext.Provider value={context}>
-          <ViewportContext.Provider value={viewportContext}>
-            <PDFLinkServiceContext.Provider value={linkService}>
-              {children}
-            </PDFLinkServiceContext.Provider>
-          </ViewportContext.Provider>
-        </PDFDocumentContext.Provider>
-      ) : (
-        "Loading..."
-      )}
-    </div>
-  );
-};
-
-export const Controls = () => {
-  return <div>Controls</div>;
-};
-
-export const OutlineItem = ({
-  level = 0,
-  item,
-}: {
-  level?: number;
-  item: NonNullable<ReturnType<typeof usePDFOutline>>[number];
-}) => {
-  const { getDestinationPage } = usePDFDocument();
-  const { goToPage } = useViewport();
-
-  return (
-    <>
-      <a
-        onClick={async () => {
-          if (!item.dest) {
-            return;
-          }
-
-          const page = await getDestinationPage(item.dest);
-
-          if (!page) {
-            return;
-          }
-
-          goToPage(page + 1);
-        }}
-      >
-        {item.title}
-      </a>
-      {item.items && item.items.length > 0 && (
-        <div>
-          {item.items.map((item) => (
-            <OutlineItem level={level + 1} item={item} />
-          ))}
-        </div>
-      )}
-    </>
-  );
-};
-
-export const Outline = () => {
-  const outline = usePDFOutline();
-
-  return (
-    <div>
-      {outline &&
-        outline.map((item) => <OutlineItem key={item.title} item={item} />)}
-    </div>
-  );
-};
+import { Viewport } from "./Viewport";
+import { useViewport } from "@/lib/viewport";
+import { Root } from "./Root";
+import { Page } from "./Page";
+import { AnnotationLayer, CanvasLayer, TextLayer } from "./Layers";
+import { Outline, OutlineChildItems, OutlineItem } from "./Outline";
+import { Pages } from "./Pages";
+import { CurrentPage } from "./Controls/PageNumber";
+import { useState } from "react";
 
 export const Debug = () => {
   const { zoom, translateX, translateY, currentPage } = useViewport();
@@ -122,128 +22,30 @@ export const Debug = () => {
   );
 };
 
-export const Viewport = ({ children }: { children: ReactNode }) => {
-  return (
-    <ViewportContainer className="bg-gray-100 h-[700px] overflow-auto">
-      {children}
-    </ViewportContainer>
-  );
-};
-
-export const Page = ({
-  children,
-  pageNumber = 1,
-}: {
-  children: ReactNode;
-  pageNumber?: number;
-}) => {
-  const pageContainerRef = useRef<HTMLDivElement>(null);
-  const { ready, context } = usePDFPageContext(pageNumber);
-
-  usePageViewport({ pageContainerRef, pageNumber });
-
-  return (
-    <PDFPageContext.Provider value={context}>
-      <div
-        ref={pageContainerRef}
-        style={{
-          display: ready ? "block" : "none",
-        }}
-      >
-        {ready && (
-          <div
-            className="shadow-lg rounded-sm m-4 overflow-hidden outline outline-black/5"
-            style={
-              {
-                "--scale-factor": 1,
-                position: "relative",
-                width: `${context.pdfPageProxy.view[2] - context.pdfPageProxy.view[0]}px`,
-                height: `${context.pdfPageProxy.view[3] - context.pdfPageProxy.view[1]}px`,
-              } as React.CSSProperties
-            }
-          >
-            {children}
-          </div>
-        )}
-      </div>
-    </PDFPageContext.Provider>
-  );
-};
-
-export const Pages = ({ children }: { children: ReactElement }) => {
-  const { pdfDocumentProxy } = usePDFDocument();
-
-  return (
-    <>
-      {Array.from({ length: pdfDocumentProxy.numPages }).map((_, index) =>
-        cloneElement(children, { key: index, pageNumber: index + 1 }),
-      )}
-    </>
-  );
-};
-
-export const TextLayer = () => {
-  const { textContainerRef } = useTextLayer();
-
-  return (
-    <div
-      className="textLayer"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-      }}
-      ref={textContainerRef}
-    />
-  );
-};
-
-export const AnnotationLayer = () => {
-  const { annotationLayerRef } = useAnnotationLayer();
-
-  return (
-    <div
-      className="annotationLayer"
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-      }}
-      ref={annotationLayerRef}
-    />
-  );
-};
-
-export const CanvasLayer = () => {
-  const { canvasRef } = useCanvasLayer();
-
-  return (
-    <canvas
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-      }}
-      ref={canvasRef}
-    />
-  );
-};
-
 export const Example = ({ fileURL }: { fileURL: string }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
   return (
-    <Root fileURL={fileURL}>
-      <Controls />
-      <Debug />
-      <Outline />
-      <Viewport>
-        <Pages>
-          <Page>
-            <CanvasLayer />
-            <TextLayer />
-            <AnnotationLayer />
-          </Page>
-        </Pages>
-      </Viewport>
+    <Root fileURL={fileURL} className="m-4 border rounded-xl overflow-hidden">
+      <div className="border-b p-3">
+        <CurrentPage />
+      </div>
+      <div className="grid grid-cols-[24rem,1fr] h-[500px] overflow-hidden">
+        <Outline className="border-r overflow-auto p-3">
+          <OutlineItem className="block">
+            <OutlineChildItems className="pl-4" />
+          </OutlineItem>
+        </Outline>
+        <Viewport className="bg-gray-100 py-4">
+          <Pages>
+            <Page className="shadow-xl m-8 my-4 first:mt-8 outline outline-black/5 rounded-md overflow-hidden">
+              <CanvasLayer />
+              <TextLayer />
+              <AnnotationLayer />
+            </Page>
+          </Pages>
+        </Viewport>
+      </div>
     </Root>
   );
 };
