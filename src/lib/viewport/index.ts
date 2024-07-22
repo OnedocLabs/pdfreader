@@ -297,7 +297,7 @@ export const useViewportContainer = ({
 }) => {
   const [origin, setOrigin] = useState<[number, number]>([0, 0]);
 
-  const { minZoom, maxZoom, setZoom, setViewportRef } = useViewport();
+  const { minZoom, maxZoom, setZoom, setViewportRef, zoom } = useViewport();
 
   useEffect(() => {
     setViewportRef(containerRef);
@@ -335,7 +335,23 @@ export const useViewportContainer = ({
     containerRef.current.scrollLeft = translateX;
 
     setZoom(() => transformations.current.zoom);
-  }, [containerRef.current, elementRef.current, setZoom]);
+  }, [containerRef.current, elementRef.current, setZoom, zoom]);
+
+  useEffect(() => {
+    if (transformations.current.zoom === zoom || !containerRef.current) {
+      return;
+    }
+
+    const dZoom = zoom / transformations.current.zoom;
+
+    transformations.current = {
+      translateX: containerRef.current.scrollLeft * dZoom,
+      translateY: containerRef.current.scrollTop * dZoom,
+      zoom,
+    };
+
+    updateTransform();
+  }, [zoom]);
 
   useEffect(() => {
     if (!elementRef.current || !elementWrapperRef.current) {

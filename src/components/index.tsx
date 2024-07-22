@@ -8,6 +8,7 @@ import { Outline, OutlineChildItems, OutlineItem } from "./Outline";
 import { Pages } from "./Pages";
 import { CurrentPage } from "./Controls/PageNumber";
 import { useState } from "react";
+import { Zoom, ZoomIn, ZoomOut } from "./Controls/Zoom";
 
 export const Debug = () => {
   const { zoom, translateX, translateY, currentPage } = useViewport();
@@ -23,12 +24,13 @@ export const Debug = () => {
 };
 
 export const Example = ({ fileURL }: { fileURL: string }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
   return (
     <Root fileURL={fileURL} className="m-4 border rounded-xl overflow-hidden">
       <div className="border-b p-3">
         <CurrentPage />
+        <ZoomOut>-</ZoomOut>
+        <Zoom />
+        <ZoomIn>+</ZoomIn>
       </div>
       <div className="grid grid-cols-[24rem,1fr] h-[500px] overflow-hidden">
         <Outline className="border-r overflow-auto p-3">
