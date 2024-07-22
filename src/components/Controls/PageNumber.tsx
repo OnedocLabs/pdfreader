@@ -1,9 +1,9 @@
 import { useViewport } from "@/lib/viewport";
-import { useEffect, useState } from "react";
+import { HTMLProps, useEffect, useState } from "react";
 
 export const NextPage = () => {};
 export const PreviousPage = () => {};
-export const CurrentPage = () => {
+export const CurrentPage = ({ ...props }: HTMLProps<HTMLInputElement>) => {
   const { currentPage, pages, goToPage } = useViewport();
   const [pageNumber, setPageNumber] = useState<string | number>(currentPage);
 
@@ -14,7 +14,9 @@ export const CurrentPage = () => {
   return (
     <input
       type="number"
+      {...props}
       style={{
+        ...props.style,
         appearance: "textfield",
         MozAppearance: "textfield",
         WebkitAppearance: "none",

@@ -8,7 +8,7 @@ export const ZoomIn = ({ ...props }: HTMLProps<HTMLButtonElement>) => {
   return (
     <Primitive.button
       {...props}
-      onClick={(e) => {
+      onClick={(e: any) => {
         props.onClick && props.onClick(e);
         setZoom((zoom) => Number((zoom + 0.1).toFixed(1)));
       }}
@@ -22,7 +22,7 @@ export const ZoomOut = ({ ...props }: HTMLProps<HTMLButtonElement>) => {
   return (
     <Primitive.button
       {...props}
-      onClick={(e) => {
+      onClick={(e: any) => {
         props.onClick && props.onClick(e);
         setZoom((zoom) => Number((zoom - 0.1).toFixed(1)));
       }}

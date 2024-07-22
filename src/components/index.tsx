@@ -26,11 +26,13 @@ export const Debug = () => {
 export const Example = ({ fileURL }: { fileURL: string }) => {
   return (
     <Root fileURL={fileURL} className="m-4 border rounded-xl overflow-hidden">
-      <div className="border-b p-3">
-        <CurrentPage />
-        <ZoomOut>-</ZoomOut>
-        <Zoom />
-        <ZoomIn>+</ZoomIn>
+      <div className="border-b p-3 flex gap-4">
+        <CurrentPage className="border bg-white rounded-md text-center py-1" />
+        <div className="flex border rounded-md">
+          <ZoomOut className="aspect-square block h-8 w-8">-</ZoomOut>
+          <Zoom className="py-1 px-2 bg-white" />
+          <ZoomIn className="aspect-square block h-8 w-8">+</ZoomIn>
+        </div>
       </div>
       <div className="grid grid-cols-[24rem,1fr] h-[500px] overflow-hidden">
         <Outline className="border-r overflow-auto p-3">

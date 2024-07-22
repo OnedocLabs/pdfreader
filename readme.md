@@ -14,19 +14,23 @@ npm i @fileforge/pdfreader
 
 You can add and remove parts of the reader by adding or removing the related components. NB: the `Viewport` component always needs to have `Pages` and `Page` as direct children.
 
+![Sample Reader with Tailwind Styling](./image.jpeg)
+
 ```jsx
 import React from 'react';
 
 import { Root, CurrentPage, ZoomOut, Zoom, ZoomIn, Outline, OutlineItem, OutlineChildItems, Viewport, Pages, Page, CanvasLayer, TextLayer, AnnotationLayer } from '@fileforge/pdfreader';
 
-const Reader = ({ fileURL }: { fileURL: string }) => {
+export const Reader = ({ fileURL }: { fileURL: string }) => {
   return (
     <Root fileURL={fileURL} className="m-4 border rounded-xl overflow-hidden">
-      <div className="border-b p-3">
-        <CurrentPage />
-        <ZoomOut>-</ZoomOut>
-        <Zoom />
-        <ZoomIn>+</ZoomIn>
+      <div className="border-b p-3 flex gap-4">
+        <CurrentPage className="border bg-white rounded-md text-center py-1" />
+        <div className="flex border rounded-md">
+          <ZoomOut className="aspect-square block h-8 w-8">-</ZoomOut>
+          <Zoom className="py-1 px-2 bg-white" />
+          <ZoomIn className="aspect-square block h-8 w-8">+</ZoomIn>
+        </div>
       </div>
       <div className="grid grid-cols-[24rem,1fr] h-[500px] overflow-hidden">
         <Outline className="border-r overflow-auto p-3">
