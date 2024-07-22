@@ -4,6 +4,19 @@ A dead simple, stylable, React PDF reader component.
 
 > Important: This component is still in development and not ready for production use.
 
+## Features
+
+- [x] Zoom in and out
+- [x] Text layer
+- [x] Annotation layer
+- [x] Canvas layer
+- [x] Page navigation
+- [x] Outline view
+- [ ] Thumbnail view
+- [ ] Two-sided view
+- [ ] Search and highlight
+- [ ] Annotation placement
+
 ## Installation
 
 ```bash
