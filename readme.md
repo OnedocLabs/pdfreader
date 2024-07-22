@@ -52,3 +52,7 @@ export const Reader = ({ fileURL }: { fileURL: string }) => {
   );
 };
 ```
+
+## Sponsors
+
+This project is sponsored by [Fileforge](https://fileforge.com).
