@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "description": "Easiest way to display and interact with PDFs from your web app.",
   "main": "dist/pdfreader.cjs",
+  "types": "dist/src/index.d.ts",
   "type": "module",
   "exports": {
     "require": "./dist/pdfreader.cjs",
@@ -13,7 +14,7 @@
   ],
   "scripts": {
     "test": "test-storybook",
-    "build": "vite build",
+    "build": "vite build && tsc --emitDeclarationOnly --declaration && tsc-alias",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -38,6 +39,7 @@
     "prettier": "^3.3.2",
     "react": "^18.3.1",
     "storybook": "^8.2.3",
+    "tsc-alias": "^1.8.10",
     "tslib": "^2.6.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0",
