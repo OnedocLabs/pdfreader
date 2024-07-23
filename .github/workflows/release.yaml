@@ -38,13 +38,13 @@ jobs:
       - run: git config --global user.name "Fileforge"
       - run: npm version patch -m "Bump version to %s [skip ci]"
         working-directory: .
+      - name: Check the tag
+        run: git status
+      - uses: ncipollo/release-action@v1
       - run: npm publish --access public
         working-directory: .
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Check the tag
-        run: echo ${{ github.ref }}
-      - uses: ncipollo/release-action@v1
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_options: "--no-verify"
