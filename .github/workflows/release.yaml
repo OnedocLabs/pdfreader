@@ -45,7 +45,7 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.version.outputs.tag }}
-          body: "Release ${{ steps.version.outputs.tag }}. Check it out on [NPM ➡️](https://www.npmjs.com/package/@fileforge/pdfreader/v/${{ steps.version.outputs.tag.replace('v', '') }})."
+          body: "Release ${{ steps.version.outputs.tag }}. Check it out on [NPM ➡️](https://www.npmjs.com/package/@fileforge/pdfreader/v/${{ steps.version.outputs.tag }})."
       - run: npm publish --access public
         working-directory: .
         env:
