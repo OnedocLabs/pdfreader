@@ -1,6 +1,6 @@
 {
   "name": "@fileforge/pdfreader",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Easiest way to display and interact with PDFs from your web app.",
   "main": "dist/pdfreader.cjs",
   "types": "dist/src/index.d.ts",
