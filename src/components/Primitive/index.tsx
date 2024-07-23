@@ -10,6 +10,7 @@ const HTMLTags = [
   "ul",
   "li",
   "input",
+  "canvas",
 ] as const;
 type HTMLTag = (typeof HTMLTags)[number];
 
