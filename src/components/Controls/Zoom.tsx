@@ -1,4 +1,4 @@
-import { HTMLProps } from "react";
+import { HTMLProps, useEffect, useRef, useState } from "react";
 import { Primitive } from "../Primitive";
 import { useViewport } from "@/lib/viewport";
 
@@ -30,8 +30,33 @@ export const ZoomOut = ({ ...props }: HTMLProps<HTMLButtonElement>) => {
   );
 };
 
-export const Zoom = ({ ...props }: HTMLProps<HTMLDivElement>) => {
-  const { zoom } = useViewport();
+export const Zoom = ({ ...props }: HTMLProps<HTMLInputElement>) => {
+  const { zoom: realZoom, setZoom: setRealZoom } = useViewport();
+  const [zoom, setZoom] = useState<string>((realZoom * 100).toFixed(0));
+  const isSelected = useRef<boolean>(false);
 
-  return <Primitive.div {...props}>{(zoom * 100).toFixed(0)}%</Primitive.div>;
+  useEffect(() => {
+    if (isSelected.current) {
+      return;
+    }
+
+    setZoom((realZoom * 100).toFixed(0));
+  }, [realZoom, isSelected.current]);
+
+  return (
+    <input
+      {...props}
+      value={zoom}
+      onClick={() => (isSelected.current = true)}
+      onChange={(e) => {
+        setRealZoom(Number(e.target.value) / 100);
+        setZoom(e.target.value);
+      }}
+      onBlur={() => {
+        isSelected.current = false;
+
+        setZoom((realZoom * 100).toFixed(0));
+      }}
+    />
+  );
 };

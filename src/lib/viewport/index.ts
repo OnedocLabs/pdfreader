@@ -82,7 +82,12 @@ export interface ViewportContextType {
   ) => void;
   setPageVisible: (pageNumber: number, percentageVisible: number) => void;
   currentPage: number;
-  goToPage: (pageNumber: number) => void;
+  goToPage: (
+    pageNumber: number,
+    options?: {
+      smooth?: boolean;
+    },
+  ) => boolean;
   setViewportRef: (ref: RefObject<HTMLDivElement>) => void;
 }
 
@@ -186,7 +191,12 @@ export const useViewportContext = ({
       });
     },
     currentPage,
-    goToPage: (pageNumber: number) => {
+    goToPage: (
+      pageNumber: number,
+      { smooth } = {
+        smooth: true,
+      },
+    ) => {
       const pageRef = pages.current.get(pageNumber);
 
       if (pageRef && viewportRef.current) {
@@ -212,11 +222,13 @@ export const useViewportContext = ({
               pageRefRect.left -
               viewportRefRect.left,
           ),
-          behavior: "smooth",
+          behavior: smooth ? "smooth" : "auto",
         });
 
-        return pageNumber;
+        return true;
       }
+
+      return false;
     },
     setViewportRef: (ref) => {
       viewportRef.current = ref.current;
