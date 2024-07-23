@@ -36,7 +36,7 @@ jobs:
       #  working-directory: .
       - run: git config --global user.email "contact@fileforge.com"
       - run: git config --global user.name "Fileforge"
-      - run: echo 'tag=$(npm version patch -m "Bump version to %s [skip ci]")' >> $GITHUB_ENV
+      - run: echo 'tag=$(npm version patch -m "Bump version to %s [skip ci]")' >> "$GITHUB_OUTPUT"
         id: version
         working-directory: .
       - name: Check the tag
