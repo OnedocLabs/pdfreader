@@ -31,6 +31,15 @@ export const Thumbnail = ({
 
         goToPage(pageNumber, { smooth: false });
       }}
+      onKeyDown={(e: any) => {
+        if (props.onKeyDown) {
+          props.onKeyDown(e);
+        }
+
+        if (e.key === "Enter") {
+          goToPage(pageNumber, { smooth: false });
+        }
+      }}
       ref={canvasRef}
     />
   );
