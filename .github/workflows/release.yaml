@@ -34,11 +34,10 @@ jobs:
         working-directory: .
       #- run: npm test
       #  working-directory: .
+      - run: git config --global user.email "contact@fileforge.com"
+      - run: git config --global user.name "Fileforge"
       - run: npm version patch -m "Bump version to %s [skip ci]"
         working-directory: .
-        env:
-          GIT_AUTHOR_NAME: Fileforge
-          GIT_AUTHOR_EMAIL: contact@fileforge.com
       - run: npm publish --access public
         working-directory: .
         env:
