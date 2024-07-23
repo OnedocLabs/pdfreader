@@ -35,7 +35,7 @@ jobs:
       #- run: npm test
       #  working-directory: .
       - run: git config --global user.email "contact@fileforge.com"
-      - run: git config --global user.name "Fileforge"
+      - run: git config --global user.name "github-actions[bot]"
       - run: echo "tag=$(npm version patch -m 'Bump version to %s [skip ci]')" >> "$GITHUB_OUTPUT"
         id: version
         working-directory: .
