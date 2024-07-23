@@ -12,7 +12,7 @@ A dead simple, stylable, React PDF reader component.
 - [x] Canvas layer
 - [x] Page navigation
 - [x] Outline view
-- [ ] Thumbnail view
+- [x] Thumbnail view
 - [ ] Two-sided view
 - [ ] Search and highlight
 - [ ] Annotation placement
