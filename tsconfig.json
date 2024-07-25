@@ -7,7 +7,7 @@
     "strict": true,
     "noStrictGenericChecks": false,
     "skipLibCheck": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "paths": {
       "@/*": [
         "./src/*"

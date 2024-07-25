@@ -13,6 +13,10 @@ export default defineConfig({
       formats: ["es", "cjs"],
     },
     emptyOutDir: true,
+    sourcemap: true,
+    rollupOptions: {
+      external: ["react"],
+    },
   },
   plugins: [react()],
 });
