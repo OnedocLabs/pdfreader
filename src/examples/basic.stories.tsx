@@ -351,7 +351,7 @@ export const WithCustomFormLayer: Story = {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target as any);
         const values = Object.fromEntries(formData.entries());
 
         alert(`Form values:\n${JSON.stringify(values, null, 2)}`);
@@ -397,7 +397,7 @@ export const WithPDFFormValues: Story = {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
+        const formData = new FormData(e.target as any);
         const values = Object.fromEntries(formData.entries());
 
         alert(`Form values:\n${JSON.stringify(values, null, 2)}`);
