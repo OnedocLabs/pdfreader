@@ -1,4 +1,4 @@
-![Banner](./banner.png)
+![![Banner](./banner.png)](https://www.fileforge.com?utm_source=github&utm_medium=referral&utm_campaign=pdfreader-readme)
 
 # PDFReader
 
