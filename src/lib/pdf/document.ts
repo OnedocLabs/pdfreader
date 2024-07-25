@@ -103,6 +103,7 @@ export const usePDFDocumentContext = ({ fileURL }: usePDFDocumentParams) => {
 
         return page;
       },
+      ready,
     } satisfies PDFDocumentContextType,
     ready,
     progress,
@@ -115,6 +116,7 @@ export interface PDFDocumentContextType {
   getDestinationPage: (
     dest: string | unknown[] | Promise<unknown[]>,
   ) => Promise<number | undefined>;
+  ready: boolean;
 }
 
 export const defaultPDFDocumentContext: PDFDocumentContextType = {
@@ -124,6 +126,7 @@ export const defaultPDFDocumentContext: PDFDocumentContextType = {
   getDestinationPage: async () => {
     throw new Error("PDF document not loaded");
   },
+  ready: false,
 } satisfies PDFDocumentContextType;
 
 export const PDFDocumentContext = createContext(defaultPDFDocumentContext);

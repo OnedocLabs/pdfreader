@@ -16,8 +16,12 @@ export const Root = forwardRef(
     {
       children,
       fileURL,
+      loader,
       ...props
-    }: HTMLProps<HTMLDivElement> & usePDFDocumentParams,
+    }: HTMLProps<HTMLDivElement> &
+      usePDFDocumentParams & {
+        loader?: ReactNode;
+      },
     ref,
   ) => {
     const { ready, context, pdfDocumentProxy } = usePDFDocumentContext({
@@ -40,7 +44,7 @@ export const Root = forwardRef(
             </ViewportContext.Provider>
           </PDFDocumentContext.Provider>
         ) : (
-          "Loading..."
+          loader || "Loading..."
         )}
       </Primitive.div>
     );

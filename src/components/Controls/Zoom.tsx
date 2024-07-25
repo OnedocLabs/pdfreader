@@ -30,7 +30,7 @@ export const ZoomOut = ({ ...props }: HTMLProps<HTMLButtonElement>) => {
   );
 };
 
-export const Zoom = ({ ...props }: HTMLProps<HTMLInputElement>) => {
+export const CurrentZoom = ({ ...props }: HTMLProps<HTMLInputElement>) => {
   const { zoom: realZoom, setZoom: setRealZoom } = useViewport();
   const [zoom, setZoom] = useState<string>((realZoom * 100).toFixed(0));
   const isSelected = useRef<boolean>(false);

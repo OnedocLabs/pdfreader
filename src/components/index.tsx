@@ -7,7 +7,7 @@ import { AnnotationLayer, CanvasLayer, TextLayer } from "./Layers";
 import { Outline, OutlineChildItems, OutlineItem } from "./Outline";
 import { Pages } from "./Pages";
 import { CurrentPage, TotalPages } from "./Controls/PageNumber";
-import { Zoom, ZoomIn, ZoomOut } from "./Controls/Zoom";
+import { CurrentZoom, ZoomIn, ZoomOut } from "./Controls/Zoom";
 import { Thumbnail, Thumbnails } from "./Thumbnails";
 
 export const Debug = () => {
@@ -34,7 +34,7 @@ export const Example = ({ fileURL }: { fileURL: string }) => {
         </div>
         <div className="flex border rounded-md">
           <ZoomOut className="aspect-square block h-8 w-8">-</ZoomOut>
-          <Zoom className="py-1 px-2 bg-white" />
+          <CurrentZoom className="py-1 px-2 bg-white" />
           <ZoomIn className="aspect-square block h-8 w-8">+</ZoomIn>
         </div>
       </div>
@@ -73,4 +73,9 @@ export {
   OutlineItem,
   Pages,
   CurrentPage,
+  CurrentZoom,
+  ZoomIn,
+  ZoomOut,
+  Thumbnail,
+  Thumbnails,
 };

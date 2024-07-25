@@ -26,11 +26,14 @@
     "@storybook/addon-essentials": "^8.2.3",
     "@storybook/addon-interactions": "^8.2.3",
     "@storybook/addon-links": "^8.2.3",
+    "@storybook/addon-storysource": "^8.2.6",
     "@storybook/blocks": "^8.2.3",
+    "@storybook/manager-api": "^8.2.6",
     "@storybook/react": "^8.2.3",
     "@storybook/react-vite": "^8.2.3",
     "@storybook/test": "^8.2.3",
     "@storybook/test-runner": "^0.19.1",
+    "@storybook/theming": "^8.2.6",
     "@types/eslint__js": "^8.42.3",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint-config-prettier": "^9.1.0",
@@ -50,6 +53,7 @@
     "react": "^18"
   },
   "dependencies": {
+    "@storybook/addon-docs": "^8.2.6",
     "@uidotdev/usehooks": "^2.4.1",
     "@use-gesture/react": "^10.3.1",
     "clsx": "^2.1.1"
