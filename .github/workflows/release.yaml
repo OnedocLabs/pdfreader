@@ -56,3 +56,6 @@ jobs:
       #    #commit_message: "Bump version [skip ci]"
       #    skip_dirty_check: true
       - run: git push origin
+      - uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
+        with:
+          path: storybook-static # default: dist/storybook
