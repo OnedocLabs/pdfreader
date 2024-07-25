@@ -1,3 +1,5 @@
+![Banner](./banner.png)
+
 # PDFReader
 
 A dead simple, stylable, React PDF reader component.
@@ -27,7 +29,7 @@ npm i @fileforge/pdfreader
 
 You can add and remove parts of the reader by adding or removing the related components. NB: the `Viewport` component always needs to have `Pages` and `Page` as direct children.
 
-![Sample Reader with Tailwind Styling](./image.jpeg)
+![Sample Reader with Tailwind Styling](./capture.png)
 
 ```jsx
 import React from 'react';

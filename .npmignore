@@ -1,0 +1,8 @@
+static
+
+*.jpg
+*.png
+
+.github
+.storybook
+storybook-static
