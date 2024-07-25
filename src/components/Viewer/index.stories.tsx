@@ -12,6 +12,6 @@ type Story = StoryObj<typeof Example>;
 export const Primary: Story = {
   name: "With Thumbnails",
   args: {
-    fileURL: "/static/brochure.pdf",
+    fileURL: "brochure.pdf",
   },
 };
