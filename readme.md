@@ -4,6 +4,8 @@
 
 A dead simple, stylable, React PDF reader component.
 
+[Docs: https://pdfreader.fileforge.com](https://pdfreader.fileforge.com/?path=/docs/viewer--docs)
+
 > Important: This component is still in development and not ready for production use.
 
 ## Features
