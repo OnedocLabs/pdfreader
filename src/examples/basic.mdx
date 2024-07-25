@@ -1,0 +1,90 @@
+import { Meta, Story, Canvas, Source } from "@storybook/blocks";
+import * as Stories from "./basic.stories";
+
+<Meta title="Basic" of={Stories} />
+
+# PDFReader
+
+## Overview
+
+The last React PDF Reader component you will need!
+
+Supports:
+
+- Panning and zooming, including keyboard and mouse controls
+- Text selection
+- Annotations and links (including internal!)
+- Customizable toolbar
+- Customizable page rendering
+- Outline and thumbnail navigation
+
+## Getting started
+
+The [Fileforge](https://www.fileforge.com/) PDFReader can be installed via npm:
+
+```sh
+npm install @fileforge/pdfreader
+```
+
+## Usage
+
+To get started, you will need to create a basic PDFReader component:
+
+```jsx
+import { Root, Viewport, Pages, Page } from "@fileforge/pdfreader";
+
+const MyPDFReader = () => (
+  <Root file="path/to/my.pdf">
+    <Viewport>
+      <Pages>
+        <Page />
+      </Pages>
+    </Viewport>
+  </Root>
+);
+```
+
+The examples below have been styled with `tailwindcss` but you could use any other CSS framework or style. Styles needed for the PDFReader components to work properly are included in the package.
+
+## Examples
+
+### Basic
+
+The simplest PDF reader you can make. It still supports zooming in and out. If you need support text selection, annotations, or links, you will need to add more components.
+
+<Story of={Stories.Basic} />
+<Source of={Stories.Basic} />
+
+### With text selection
+
+To add support for text selection and enable the browser search functionality (CTRL+F), you will need to add the `TextLayer` component.
+
+<Story of={Stories.WithTextLayer} />
+<Source of={Stories.WithTextLayer} />
+
+### With link support
+
+To add support for links and annotations (including internal links), you will need to add the `AnnotationLayer` component.
+
+<Story of={Stories.WithAnnotationLayer} />
+<Source of={Stories.WithAnnotationLayer} />
+
+### With page controls
+
+<Story of={Stories.WithPageControl} />
+<Source of={Stories.WithPageControl} />
+
+### With zoom controls
+
+<Story of={Stories.WithZoomControl} />
+<Source of={Stories.WithZoomControl} />
+
+### With outline
+
+<Story of={Stories.WithOutline} />
+<Source of={Stories.WithOutline} />
+
+### With thumbnail navigation
+
+<Story of={Stories.WithThumbnails} />
+<Source of={Stories.WithThumbnails} />
