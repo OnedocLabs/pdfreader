@@ -3,7 +3,7 @@ import { Viewport } from "./Viewport";
 import { useViewport } from "@/lib/viewport";
 import { Root } from "./Root";
 import { Page } from "./Page";
-import { AnnotationLayer, CanvasLayer, TextLayer } from "./Layers";
+import { AnnotationLayer, CanvasLayer, TextLayer, CustomLayer } from "./Layers";
 import { Outline, OutlineChildItems, OutlineItem } from "./Outline";
 import { Pages } from "./Pages";
 import { CurrentPage, TotalPages } from "./Controls/PageNumber";
@@ -68,6 +68,7 @@ export {
   AnnotationLayer,
   CanvasLayer,
   TextLayer,
+  CustomLayer,
   Outline,
   OutlineChildItems,
   OutlineItem,

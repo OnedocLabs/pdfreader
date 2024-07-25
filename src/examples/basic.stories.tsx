@@ -4,6 +4,7 @@ import {
   AnnotationLayer,
   CanvasLayer,
   CurrentPage,
+  CustomLayer,
   Outline,
   OutlineChildItems,
   OutlineItem,
@@ -310,5 +311,117 @@ export const WithThumbnails: Story = {
   },
   args: {
     fileURL: "brochure.pdf",
+  },
+};
+
+export const WithCustomLayer: Story = {
+  render: ({ fileURL }: { fileURL: string }) => (
+    <Root
+      fileURL={fileURL}
+      className="bg-gray-100 border rounded-md overflow-hidden relative h-[500px]"
+      loader={<div className="p-4">Loading...</div>}
+    >
+      <Viewport className="p-4 h-full">
+        <Pages>
+          <Page className="my-4">
+            <CanvasLayer />
+            <CustomLayer>
+              {(pageNumber) => {
+                return (
+                  <div className="relative">
+                    <p className="bg-white border p-2">
+                      This is page {pageNumber}
+                    </p>
+                  </div>
+                );
+              }}
+            </CustomLayer>
+          </Page>
+        </Pages>
+      </Viewport>
+    </Root>
+  ),
+  args: {
+    fileURL: "brochure.pdf",
+  },
+};
+
+export const WithCustomFormLayer: Story = {
+  render: ({ fileURL }: { fileURL: string }) => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const values = Object.fromEntries(formData.entries());
+
+        alert(`Form values:\n${JSON.stringify(values, null, 2)}`);
+      }}
+    >
+      <button type="submit">Get form values</button>
+      <Root
+        fileURL={fileURL}
+        className="bg-gray-100 border rounded-md overflow-hidden relative h-[500px]"
+        loader={<div className="p-4">Loading...</div>}
+      >
+        <Viewport className="p-4 h-full">
+          <Pages>
+            <Page className="my-4">
+              <CanvasLayer />
+              <CustomLayer>
+                {(pageNumber) => {
+                  return (
+                    <div className="relative">
+                      <input
+                        name={`${pageNumber}-input`}
+                        className="p-2 border rounded-md m-2"
+                        placeholder={`Input for page ${pageNumber}`}
+                        type="text"
+                      />
+                    </div>
+                  );
+                }}
+              </CustomLayer>
+            </Page>
+          </Pages>
+        </Viewport>
+      </Root>
+    </form>
+  ),
+  args: {
+    fileURL: "brochure.pdf",
+  },
+};
+
+export const WithPDFFormValues: Story = {
+  render: ({ fileURL }: { fileURL: string }) => (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const values = Object.fromEntries(formData.entries());
+
+        alert(`Form values:\n${JSON.stringify(values, null, 2)}`);
+      }}
+    >
+      <button type="submit">Get form values</button>
+      <Root
+        fileURL={fileURL}
+        className="bg-gray-100 border rounded-md overflow-hidden relative h-[500px]"
+        loader={<div className="p-4">Loading...</div>}
+      >
+        <Viewport className="p-4 h-full">
+          <Pages>
+            <Page className="my-4">
+              <CanvasLayer />
+              <TextLayer />
+              <AnnotationLayer />
+            </Page>
+          </Pages>
+        </Viewport>
+      </Root>
+    </form>
+  ),
+  args: {
+    fileURL: "form.pdf",
   },
 };

@@ -4,6 +4,7 @@ import {
 } from "@/lib/pdf/layers/annotation";
 import { useCanvasLayer } from "@/lib/pdf/layers/canvas";
 import { useTextLayer } from "@/lib/pdf/layers/text";
+import { usePDFPage } from "@/lib/pdf/page";
 import clsx from "clsx";
 import { HTMLProps } from "react";
 
@@ -72,4 +73,14 @@ export const CanvasLayer = ({
       ref={canvasRef}
     />
   );
+};
+
+export const CustomLayer = ({
+  children,
+}: {
+  children: (pageNumber: number) => JSX.Element;
+}) => {
+  const { pageNumber } = usePDFPage();
+
+  return children(pageNumber);
 };

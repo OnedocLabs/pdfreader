@@ -56,13 +56,15 @@ export const usePDFPageContext = (pageNumber: number) => {
       get pdfPageProxy() {
         return getPDFPageProxy();
       },
-    },
+      pageNumber,
+    } satisfies PDFPageContextType,
     ready,
     pdfPageProxy: page.current,
   };
 };
 
 export interface PDFPageContextType {
+  pageNumber: number;
   pdfPageProxy: PDFPageProxy;
 }
 
@@ -70,6 +72,7 @@ export const defaultPDFPageContext: PDFPageContextType = {
   get pdfPageProxy(): PDFPageProxy {
     throw new Error("PDF page not loaded");
   },
+  pageNumber: 0,
 } satisfies PDFPageContextType;
 
 export const PDFPageContext = createContext(defaultPDFPageContext);
