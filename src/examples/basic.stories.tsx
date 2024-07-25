@@ -70,6 +70,29 @@ export const WithTextLayer: Story = {
   },
 };
 
+export const WithInternalLinks: Story = {
+  render: ({ fileURL }: { fileURL: string }) => (
+    <Root
+      fileURL={fileURL}
+      className="bg-gray-100 border rounded-md overflow-hidden relative h-[500px]"
+      loader={<div className="p-4">Loading...</div>}
+    >
+      <Viewport className="p-4 h-full">
+        <Pages>
+          <Page className="my-4">
+            <CanvasLayer />
+            <TextLayer />
+            <AnnotationLayer />
+          </Page>
+        </Pages>
+      </Viewport>
+    </Root>
+  ),
+  args: {
+    fileURL: "brochure.pdf",
+  },
+};
+
 export const WithAnnotationLayer: Story = {
   render: ({ fileURL }: { fileURL: string }) => (
     <Root
