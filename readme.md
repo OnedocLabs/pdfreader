@@ -1,4 +1,4 @@
-[![Banner](./banner.png)](https://www.fileforge.com?utm_source=github&utm_medium=referral&utm_campaign=pdfreader-readme)
+[![Banner](https://raw.githubusercontent.com/OnedocLabs/pdfreader/main/banner.png)](https://www.fileforge.com?utm_source=github&utm_medium=referral&utm_campaign=pdfreader-readme)
 
 # PDFReader
 
@@ -31,7 +31,7 @@ npm i @fileforge/pdfreader
 
 You can add and remove parts of the reader by adding or removing the related components. NB: the `Viewport` component always needs to have `Pages` and `Page` as direct children.
 
-![Sample Reader with Tailwind Styling](./capture.png)
+![Sample Reader with Tailwind Styling](https://raw.githubusercontent.com/OnedocLabs/pdfreader/main/capture.png)
 
 ```jsx
 import React from 'react';
