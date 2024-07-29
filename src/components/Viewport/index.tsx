@@ -20,7 +20,6 @@ export const Viewport = ({ children, ...props }: HTMLProps<HTMLDivElement>) => {
       style={{
         display: "flex",
         justifyContent: "center",
-        touchAction: "none",
         ...props.style,
         position: "relative",
         overflow: "auto",

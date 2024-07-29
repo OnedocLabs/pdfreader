@@ -10,7 +10,9 @@ import {
 } from "react";
 
 export const useDPR = () => {
-  const [dpr, setDPR] = useState(!window ? 1 : window.devicePixelRatio);
+  const [dpr, setDPR] = useState(
+    !window ? 1 : Math.min(window.devicePixelRatio, 2),
+  );
 
   useEffect(() => {
     if (!window) {
@@ -393,6 +395,22 @@ export const useViewportContainer = ({
   useEffect(() => {
     updateTransform();
   }, []);
+
+  useEffect(() => {
+    const preventDefault = (e: TouchEvent) => e.preventDefault();
+
+    // @ts-expect-error Could be null
+    document.addEventListener("gesturestart", preventDefault);
+    // @ts-expect-error Could be null
+    document.addEventListener("gesturechange", preventDefault);
+
+    return () => {
+      // @ts-expect-error Could be null
+      document.removeEventListener("gesturestart", preventDefault);
+      // @ts-expect-error Could be null
+      document.removeEventListener("gesturechange", preventDefault);
+    };
+  });
 
   useGesture(
     {
