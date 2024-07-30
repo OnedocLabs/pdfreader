@@ -23,7 +23,7 @@ export const useCanvasLayer = () => {
 
     const canvas = canvasRef.current;
 
-    const scale = debouncedVisible ? dpr * zoom : 1;
+    const scale = debouncedVisible ? dpr * zoom : 0.5;
 
     canvas.height = viewport.height * scale;
     canvas.width = viewport.width * scale;
