@@ -7,7 +7,8 @@
   "type": "module",
   "exports": {
     "require": "./dist/pdfreader.cjs",
-    "import": "./dist/pdfreader.js"
+    "import": "./dist/pdfreader.js",
+    "types": "./dist/src/index.d.ts"
   },
   "files": [
     "dist"
