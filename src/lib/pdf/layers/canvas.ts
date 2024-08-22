@@ -45,7 +45,7 @@ export const useCanvasLayer = () => {
         return;
       }
 
-      console.error(error);
+      throw error;
     });
 
     return () => {
