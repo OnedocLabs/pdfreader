@@ -39,6 +39,15 @@ export const useCanvasLayer = () => {
       viewport,
     });
 
+    renderingTask.promise.catch((error) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      if (error.name === "RenderingCancelledException") {
+        return;
+      }
+
+      console.error(error);
+    });
+
     return () => {
       void renderingTask.cancel();
     };
