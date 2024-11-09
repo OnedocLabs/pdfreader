@@ -74,6 +74,7 @@ export {
   OutlineItem,
   Pages,
   CurrentPage,
+  TotalPages,
   CurrentZoom,
   ZoomIn,
   ZoomOut,
