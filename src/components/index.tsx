@@ -62,6 +62,9 @@ export const Example = ({ fileURL }: { fileURL: string }) => {
 };
 
 export {
+  // Hooks
+  useViewport,
+  // Components
   Viewport,
   Root,
   Page,
